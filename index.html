@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedra, Papel, Tesoura.</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  
+  <div class="app">
+
+    <div class="top">
+      <h3 class="title">Pedra, Papel, Tesoura</h3>
+      <span>escolha sua opção clicando abaixo</span>
+    </div>
+
+    <div class="display">
+      <h3 class="your-choice">🎮  você: <span id="your-choice"></span></h3>
+      <h3 class="computer-choice">👾 máquina: <span id="computer-choice"></span></h3>
+    </div>
+
+    <div class="btns">
+      <button class="btn" id="pedra">Pedra</button>
+      <button class="btn" id="papel">Papel</button>
+      <button class="btn" id="tesoura">Tesoura</button>
+    </div>
+
+    <h5 class="result">Resultado: <span id="result"></span></h5>
+  </div>
+
+  
+
+  <script>
+
+    let userChoiceDisplay = document.getElementById('your-choice')
+    let pcChoiceDisplay = document.getElementById('computer-choice')
+    let resultDisplay =  document.getElementById('result')
+    let btnChoices = document.querySelectorAll('.btn')
+    let computerChoice
+    let result 
+    let userChoice
+
+    btnChoices.forEach(btnChoices => btnChoices.addEventListener("click",  clickChoice = (e) => {
+      userChoice = e.target.id
+      userChoiceDisplay.innerHTML = userChoice
+      computerChoiceFun()
+      gettingResult()
+    }))
+
+    computerChoiceFun = () => {
+      const randomNumber = Math.floor(Math.random() * btnChoices.length) + 1
+
+      switch(randomNumber) {
+        case 1:
+        computerChoice = "pedra"
+        break
+
+        case 2:
+        computerChoice = "papel"
+        break
+
+        case 3: 
+        computerChoice = "tesoura"
+        break
+      }
+      pcChoiceDisplay.innerHTML = computerChoice
+    }
+
+    function gettingResult() {
+      
+      if (computerChoice === userChoice) {
+        result = "temos um empate! "
+      }
+      else if (computerChoice ==="pedra" && userChoice === "papel") {
+        result = "Parabéns, você amassou! "
+      }
+      else if (computerChoice ==="pedra" && userChoice === "tesoura") {
+        result = "Não foi dessa vez. Você perdeu.  "
+      }
+      else if (computerChoice ==="papel" && userChoice === "pedra") {
+        result = "Você perdeu dessa vez. "
+      }
+      else if (computerChoice ==="papel" && userChoice === "tesoura") {
+        result = "Uhuul! Você venceu."
+      }
+      else if (computerChoice === "tesoura" && userChoice === "pedra") {
+        result = "Uhuul! Você venceu."
+      }
+      else if (computerChoice === "tesoura" && userChoice === "papel") {
+        result = "Poxa! perdeu."
+      }
+      resultDisplay.innerHTML = result
+    }
+
+  </script>
+</body>
+</html>
